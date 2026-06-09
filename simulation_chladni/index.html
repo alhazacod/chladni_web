@@ -3,19 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulacion Figuras de Chladni</title>
+    <title>Simulación Figuras de Chladni</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app-container">
         <canvas id="glCanvas"></canvas>
-        
+
         <div id="controls">
+
+            <!-- AUDIO SECTION -->
+            <div class="section-title">Input Sonoro</div>
+
             <div class="control-group">
-                <label>Particulas: <span id="valParticles">10000</span></label>
-                <input type="range" id="sliderParticles" min="1000" max="30000" step="1000" value="10000" autocomplete="off">
-                <button id="btnRstPrtclPos">Reiniciar Posicion de Particulas</button>
+                <button id="btnMic">🎙 Usa tu Microfono</button>
+
+                <label class="file-label" for="inputFile">♪ Cargar Archivo de Audio</label>
+                <input type="file" id="inputFile" accept="audio/*">
+
+                <button id="btnStopAudio">■ Detener Audio</button>
+                <p id="audioStatus" class="audio-status"></p>
             </div>
+
+            <!-- VU meter / frequency visualizer -->
+            <canvas id="vuCanvas" width="240" height="48"></canvas>
+
+            <!-- MANUAL CONTROLS -->
+            <div class="section-title">Controles Manuales</div>
 
             <div class="control-group">
                 <label>Frecuencia (ω): <span id="valFreq">19.0</span></label>
@@ -23,15 +37,21 @@
             </div>
 
             <div class="control-group">
+                <label>Particulas: <span id="valParticles">10000</span></label>
+                <input type="range" id="sliderParticles" min="1000" max="30000" step="1000" value="10000" autocomplete="off">
+                <button id="btnRstPrtclPos">Reiniciar Posicion de las Particulas</button>
+            </div>
+
+            <div class="control-group">
                 <label>Condiciones de Frontera:</label>
                 <select id="selectBC" autocomplete="off">
-                    <option value="dirichlet">Dirichlet (Extremos Fijos)</option>
-                    <option value="neumann">Neumann (Extremos Fijos)</option>
+                    <option value="dirichlet">Dirichlet (Bordes Fijos)</option>
+                    <option value="neumann">Neumann (Bordes Libres)</option>
                 </select>
             </div>
 
             <div class="control-group">
-                <label>Fuentes: <span id="valSources">1</span></label>
+                <label>Numero de Fuentes: <span id="valSources">1</span></label>
                 <input type="range" id="sliderSources" min="1" max="10" step="1" value="1" autocomplete="off">
             </div>
 
