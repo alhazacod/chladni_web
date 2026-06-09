@@ -2,97 +2,176 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Figuras de Chladni</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            padding: 30px;
-            background-color: #1e293b;
-        }
-        h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        h2 {
-            margin-top: 10px;
-            font-weight: normal;
-            color: #94a3b8;
-        }
-        .container {
-            padding: 30px;
-        }
-        .miembros {
-            margin: 20px 0;
-        }
-        .miembros p {
-            margin: 5px;
-        }
-        img {
-            width: 400px;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-        .descripcion {
-            max-width: 600px;
-            margin: 30px auto;
-            line-height: 1.6;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Figuras de Chladni | Explicación completa + simulaciones</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <h1>CHLADNI FIGURES</h1>
-    <h2>Dr Manhattan</h2>
+    <h1>🎵 Figuras de Chladni: entendiendo las ondas a través de la experimentación visual</h1>
+    <h2>Cuando el sonido dibuja patrones invisibles</h2>
+    <div class="miembros">
+        <p><strong>Grupo Dr. Manhattan</strong> — Universidad Nacional de Colombia</p>
+        <p>Manuel Angel Garcia Manzano · Juan Camilo Quintero Vasquez · Juan David Barrera Salazar · Sebastian Salgado Carvajal</p>
+    </div>
 </header>
 
-<div class="container">
+<main class="container">
 
-    <div class="miembros">
-        <h3>Integrantes del grupo</h3>
-        <p>Manuel Angel Garcia Manzano - CEO – mangarciama@unal.edu.co</p>
-        <p>Juan Camilo Quintero Vasquez - CSO – juquinterov@unal.edu.co</p>
-        <p>Juan David Barrera Salazar - CFO – jbarrersa@unal.edu.co</p>
-        <p>Sebastian Salgado Carvajal - CCO – sesalgadoc@unal.edu.co</p>
-    </div>
+    <!-- =========================================== -->
+    <!-- 1. INTRODUCCIÓN                             -->
+    <!-- =========================================== -->
+    <section class="card intro">
+        <h2>🧠 ¿Qué estamos viendo?</h2>
+        <p>Imagina una bandeja metálica cubierta con una fina capa de arena. Si la haces vibrar (por ejemplo, frotando un arco de violín por el borde), la arena empieza a moverse sola y forma <strong>figuras geométricas perfectas</strong>: cuadrados, cruces, estrellas... ¡como por arte de magia! Eso son las <strong>figuras de Chladni</strong>.</p>
+        <div class="analogia">
+            💡 <strong>Analogía sencilla:</strong> Si saltas en una cama elástica, hay zonas donde la tela se hunde mucho (antinodos) y otras donde casi no se mueve (nodos). Los granos de arena son como personas que huyen de las zonas que más se mueven y se refugian en las quietas.
+        </div>
+        <p>Estas figuras fueron descubiertas por el músico y científico alemán <strong>Ernst Chladni</strong> a finales del siglo XVIII. Hoy las usamos para entender cómo vibran los objetos (desde instrumentos musicales hasta puentes) y para enseñar física de ondas de forma visual.</p>
 
-    <div class="descripcion">
-        <h3>¿Qué son las figuras de Chladni?</h3>
-        <p>
-            Las figuras de Chladni son patrones que se forman cuando partículas como arena
-            o sal se colocan sobre una superficie que vibra. Al aplicar sonido o vibraciones,
-            se generan zonas donde la superficie no se mueve (líneas nodales), y es allí donde
-            las partículas se acumulan, formando patrones geométricos sorprendentes.
-            Este experimento permite observar la relación entre el sonido, la frecuencia
-            y las formas físicas.
-        </p>
-    </div>
+        <figure class="figure-group">
 
-    <div>
-        <h3>Ejemplo de figuras de Chladni</h3>
-        <img src="https://neumanncondition.com/articles/the-quest-to-finding-chladni-patterns-2/Square1.webp" alt="Figuras de Chladni">
-    </div>
+            <div class="figure-grid">
+                <img src="https://paulbourke.net/geometry/chladni/c_1_5.gif" alt="Figura de Chladni c_1_5">
+                <img src="https://paulbourke.net/geometry/chladni/c_2_5.gif" alt="Figura de Chladni c_2_5">
+                <img src="https://paulbourke.net/geometry/chladni/c_2_3.gif" alt="Figura de Chladni c_2_3">
+                <img src="https://paulbourke.net/geometry/chladni/c_1_3.gif" alt="Figura de Chladni c_1_3">
+            </div>
 
-    <div class="simulacion">
-        <h1>Simulación interactiva</h1>
+            <figcaption>
+                Figuras obtenidas de
+                <a href="https://paulbourke.net/geometry/chladni/" target="_blank">
+                    https://paulbourke.net/geometry/chladni/
+                </a>
+            </figcaption>
 
-        <iframe
-            src="simulation_chladni/index.html"
-            width="100%"
-            height="850"
-            frameborder="0">
-        </iframe>
+        </figure>
 
-    </div>
+    </section>
 
-</div>
+    <!-- =========================================== -->
+    <!-- 2. SIMULACIÓN 1D: CUERDA VIBRANTE CON PARTÍCULAS -->
+    <!-- =========================================== -->
+    <section class="card">
+        <h2>📏 Empecemos fácil: una cuerda que vibra (1D)</h2>
+        <p>Antes de la placa 2D, observemos algo más simple: una <strong>cuerda elástica fija en ambos extremos</strong>. Cuando la cuerda vibra, algunos puntos no se mueven nunca: son los <strong>nodos</strong>. Las partículas (los granos de arena) ruedan hacia esos nodos y se quedan allí.</p>
+        <p>En la simulación de abajo, la cuerda vibra en tiempo real. Puedes cambiar el <strong>modo de vibración</strong> (1, 2, 3 o 4). Las partículas amarillas empiezan en posiciones al azar y poco a poco se mueven hacia los nodos (líneas punteadas).</p>
+        
+        <div class="sim1d-container">
+            <canvas id="canvas1D" width="700" height="280" style="width:100%; max-width:700px; height:auto; background:#0a0f1e; border-radius:16px; border:1px solid #2d3a5e;"></canvas>
+            <div class="controls-1d">
+                <div class="ctrl-group">
+                    <label>🎼 Modo (n): </label>
+                    <input type="range" id="modeSlider" min="2" max="8" step="1" value="2">
+                    <span id="modeValueDisplay" class="badge">2</span>
+                    <button id="resetParticles1D" class="btn-secondary">🔄 Repartir partículas</button>
+                </div>
+                <p class="hint">📌 La cuerda vibra. Las partículas 🟡 se mueven horizontalmente hacia los nodos (líneas amarillas punteadas).</p>
+            </div>
+        </div>
+        <div class="explicacion-matematica">
+            <h3>✍️ Matemáticas de la cuerda</h3>
+            <p>La posición vertical de la cuerda en el punto \(x\) y el tiempo \(t\) sigue la ecuación de onda unidimensional:</p>
+            <div class="ecuacion">\[
+                \frac{\partial^2 y}{\partial t^2} = c^2 \frac{\partial^2 y}{\partial x^2}
+            \]</div>
+            <p>Para una cuerda fija en \(x=0\) y \(x=1\), las soluciones son <strong>modos normales</strong>:</p>
+            <div class="ecuacion">\[
+                y_n(x,t) = \sin(n\pi x) \cdot \cos(2\pi f_n t)
+            \]</div>
+            <p>donde \(n=1,2,3,\dots\) y la frecuencia \(f_n\) es proporcional a \(n\). Los <strong>nodos</strong> son los puntos que nunca se mueven: ocurren cuando \(\sin(n\pi x)=0\), es decir, \(x = 0,\; \frac{1}{n},\; \frac{2}{n},\; \dots,\; 1\).</p>
+            <p>Las partículas sienten una fuerza que las empuja hacia los nodos. Esa fuerza es proporcional a \(-\nabla (y^2)\), que es máxima cerca de los antinodos y cero en los nodos. Con un poco de friccion, se detienen exactamente en los puntos quietos.</p>
+        </div>
+    </section>
 
+    <!-- =========================================== -->
+    <!-- 3. GENERALIZACIÓN A 2D: LA PLACA CUADRADA   -->
+    <!-- =========================================== -->
+    <section class="card">
+        <h2>🧩 De la línea al plano: la placa cuadrada</h2>
+        <p>Una placa delgada (como una bandeja) vibra de forma más compleja. Ahora tenemos dos direcciones, \(x\) e \(y\). La ecuación que gobierna sus vibraciones es la <strong>ecuación de ondas para placas</strong> (ecuación biharmónica):</p>
+        <div class="ecuacion">\[
+            \frac{\partial^4 u}{\partial x^4} + 2 \frac{\partial^4 u}{\partial x^2 \partial y^2} + \frac{\partial^4 u}{\partial y^4} + \frac{\rho h}{D} \frac{\partial^2 u}{\partial t^2} = 0
+        \]</div>
+        <p>Aquí \(u(x,y,t)\) es el desplazamiento vertical de la placa, \(\rho\) es la densidad, \(h\) el espesor y \(D\) la rigidez a la flexión. <strong>No te asustes</strong>; lo importante es que, al igual que en la cuerda, podemos buscar soluciones que son productos de funciones seno y coseno.</p>
+        <p>Para una placa con bordes fijos (<strong>condición Dirichlet</strong>), los modos normales son:</p>
+        <div class="ecuacion">\[
+            u_{mn}(x,y,t) = \sin(m\pi x) \sin(n\pi y) \cos(\omega_{mn} t)
+        \]</div>
+        <p>Los nodos (líneas donde la placa no vibra) se dan cuando \(\sin(m\pi x)=0\) o \(\sin(n\pi y)=0\). Es decir, líneas verticales en \(x = \frac{i}{m}\) y horizontales en \(y = \frac{j}{n}\).</p>
+        <p>En cambio, si los bordes están libres (<strong>condición Neumann</strong>), los modos usan cosenos: \(u_{mn} = \cos(m\pi x)\cos(n\pi y)\). Las líneas nodales cambian.</p>
+        <p>Interactúa con los deslizadores y observa cómo se dibujan esas líneas nodales. Son las “rayas” donde la arena se acumularía.</p>
+        
+        <div class="nodal2d-panel">
+            <div class="canvas-2d-wrapper">
+                <canvas id="canvas2DNodal" width="400" height="400" style="width:100%; max-width:400px; background:#0f1222; border-radius:16px; border:1px solid #2d3a5e;"></canvas>
+            </div>
+            <div class="controls-2d">
+                <div class="ctrl-group">
+                    <label>📐 Modo horizontal (m): </label>
+                    <input type="range" id="modeM" min="1" max="5" step="1" value="2">
+                    <span id="mValue" class="badge">2</span>
+                </div>
+                <div class="ctrl-group">
+                    <label>📐 Modo vertical (n): </label>
+                    <input type="range" id="modeN" min="1" max="5" step="1" value="2">
+                    <span id="nValue" class="badge">2</span>
+                </div>
+                <p class="small">🔍 Ejemplo: (m=2, n=2) → una línea vertical en x=0.5 y una horizontal en y=0.5 (cruz). (m=3, n=2) → dos verticales en x=1/3 y 2/3, y una horizontal en y=0.5.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================== -->
+    <!-- 4. EXPLICACIÓN DEL ALGORITMO DE LA SIMULACIÓN 2D -->
+    <!-- =========================================== -->
+    <section class="card">
+        <h2>⚙️ ¿Cómo funciona la simulación interactiva (la del recuadro grande)?</h2>
+        <p>La simulación principal que verás más abajo (dentro del iframe) no resuelve la ecuación diferencial paso a paso (eso sería muy lento). En su lugar, usa un <strong>método de superposición de modos</strong>. Te lo explico sencillo:</p>
+        <ol>
+            <li><strong>Modos básicos:</strong> Cualquier vibración se puede escribir como suma de muchos “patrones” simples (los senos y cosenos de la sección anterior). La simulación suma hasta 12×12 modos.</li>
+            <li><strong>Amplitud de cada modo:</strong> Depende de la frecuencia que elijas y de dónde estén las fuentes (puntos rojos). Si la frecuencia elegida está cerca de la frecuencia natural de un modo, ese modo se vuelve dominante.</li>
+            <li><strong>Fuerza sobre los granos:</strong> En cada instante se calcula la altura de la placa \(Z(x,y)\) y su gradiente \(\nabla Z\). La fuerza que empuja la arena es \(\mathbf{F} = -2Z\,\nabla Z\). Esto hace que los granos se muevan hacia donde \(Z=0\) (los nodos).</li>
+            <li><strong>Movimiento de los granos:</strong> Se aplica una física simple (aceleración = fuerza, rozamiento y un poco de ruido) y se actualiza 60 veces por segundo.</li>
+        </ol>
+        <p>¡Así logramos que la simulación sea rápida y puedas cambiar parámetros en tiempo real!</p>
+        <div class="tip">
+            💡 <strong>Prueba esto:</strong> Aumenta la frecuencia lentamente y verás cómo las figuras cambian. También puedes arrastrar las fuentes rojas para excitar la placa en puntos concretos.
+        </div>
+    </section>
+
+    <!-- =========================================== -->
+    <!-- 5. SIMULACIÓN COMPLETA (IFRAME)              -->
+    <!-- =========================================== -->
+    <section class="card fullwidth-sim">
+        <h2>🎛️ Simulación 2D completa – ¡Experimenta!</h2>
+        <p>Aquí tienes la simulación principal. Ajusta la frecuencia, el número de fuentes, la condición de borde, y observa cómo se forman los patrones. Puedes arrastrar las fuentes rojas.</p>
+        <div class="iframe-wrapper">
+            <iframe src="simulation_chladni/index.html" title="Simulación Chladni 2D" width="100%" height="800" frameborder="0" allow="fullscreen"></iframe>
+        </div>
+        <p class="footer-sim">💡 Sugerencia: Prueba con <strong>Condición de borde = Neumann</strong> y <strong>Frecuencia = 25</strong>. Verás patrones distintos.</p>
+    </section>
+
+    <!-- =========================================== -->
+    <!-- 6. REFERENCIAS                              -->
+    <!-- =========================================== -->
+    <section class="card referencias">
+        <h2>📚 Referencias y recursos para seguir aprendiendo</h2>
+        <ul>
+            <li><a href="https://www.dynamicmath.xyz/chladni-patterns/" target="_blank" rel="noopener">Dynamic Math – Chladni Patterns</a> (simulador interactivo adicional)</li>
+            <li><a href="https://archive.bridgesmathart.org/2016/bridges2016-481.pdf" target="_blank" rel="noopener">Bridges 2016 – Matemáticas y arte de las figuras de Chladni</a></li>
+            <li><a href="https://paulbourke.net/geometry/chladni/" target="_blank" rel="noopener">Paul Bourke – Chladni Patterns</a> (explicación técnica y ejemplos)</li>
+        </ul>
+        <p>Estas referencias profundizan en la matemática y las aplicaciones de las figuras de Chladni, desde la física hasta el arte generativo.</p>
+    </section>
+</main>
+
+<footer>
+    <p>🌌 Proyecto para la Clase "Fisica: Las Grandes Ideas que Cambiaron al Mundo" – Figuras de Chladni: entendiendo las ondas a través de la experimentación visual.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
