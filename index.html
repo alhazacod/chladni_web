@@ -125,11 +125,55 @@
     </section>
 
     <!-- =========================================== -->
+    <!--            LÍNEAS NODALES CURVAS            -->
+    <!-- =========================================== -->
+    <section class="card">
+        <h2>🌀 Líneas nodales curvas: cuando los modos se combinan</h2>
+        <p>Hasta ahora hemos visto modos puros, cuyas líneas nodales son siempre rectas horizontales y verticales (por ejemplo, \(\sin(2\pi x)\sin(2\pi y)\) da una cruz). Pero en una figura de Chladni real, las frecuencias de excitación suelen activar <strong>varios modos a la vez</strong>. Al superponerse, las líneas nodales se vuelven <strong>curvas</strong>: arcos, hipérbolas, espirales… ¡figuras mucho más interesantes!</p>
+        <p>La condición para que un punto \((x,y)\) sea nodal es que la suma de los modos sea cero:</p>
+        <div class="ecuacion">\[
+            a \cdot \sin(m\pi x)\sin(n\pi y) + b \cdot \sin(p\pi x)\sin(q\pi y) = 0
+        \]</div>
+        <p>Variando los coeficientes \(a\) y \(b\) (las amplitudes relativas de cada modo), la ecuación se transforma y las líneas nodales dejan de ser rectas. En la simulación de abajo, puedes ajustar los modos \((m,n)\) y \((p,q)\) y el factor de mezcla \(k = b/a\). Observa cómo aparecen curvas suaves. ¡Pruébalo!</p>
+        
+        <div class="curved-nodal-container">
+            <canvas id="canvasCurvedNodal" width="450" height="450" style="width:100%; max-width:450px; background:#0f1222; border-radius:16px; border:1px solid #2d3a5e;"></canvas>
+            <div class="controls-curved">
+                <div class="ctrl-group">
+                    <label>Modo 1 (m,n):</label>
+                    <input type="range" id="modeM1" min="1" max="4" step="1" value="3">
+                    <span id="m1Val" class="badge">3</span>
+                    <input type="range" id="modeN1" min="1" max="4" step="1" value="3">
+                    <span id="n1Val" class="badge">3</span>
+                </div>
+                <div class="ctrl-group">
+                    <label>Modo 2 (p,q):</label>
+                    <input type="range" id="modeM2" min="1" max="4" step="1" value="2">
+                    <span id="m2Val" class="badge">2</span>
+                    <input type="range" id="modeN2" min="1" max="4" step="1" value="2">
+                    <span id="n2Val" class="badge">2</span>
+                </div>
+                <div class="ctrl-group">
+                    <label>Mezcla (k = b/a):</label>
+                    <input type="range" id="mixFactor" min="-2" max="2" step="0.05" value="0.8">
+                    <span id="mixVal" class="badge">0.80</span>
+                </div>
+                <p class="small">🔍 Los nodos son las líneas azules. Son curvas porque los dos modos compiten. Por ejemplo, (2,1)+(1,2) produce una silla de montar.</p>
+            </div>
+        </div>
+        <div class="explicacion-matematica">
+            <h3>📐 ¿Por qué aparecen curvas?</h3>
+            <p>Imagina que tienes dos patrones de vibración. En algunos puntos los dos se refuerzan, en otros se anulan. El conjunto de puntos donde la suma es cero forma una línea que no es necesariamente recta. Matemáticamente, estamos resolviendo una ecuación implícita que mezcla senos y cosenos, lo que produce curvas como las que ves. Esto es lo que ocurre en una placa real cuando la frecuencia excitada no coincide exactamente con un modo puro, sino que activa una combinación.</p>
+            <p>En experimentos famosos (como los de Chladni), estas curvas producen figuras asombrosas: estrellas, hexágonos, etc. ¡La física ondulatoria es capaz de generar arte!</p>
+        </div>
+    </section>
+
+    <!-- =========================================== -->
     <!-- 4. EXPLICACIÓN DEL ALGORITMO DE LA SIMULACIÓN 2D -->
     <!-- =========================================== -->
     <section class="card">
-        <h2>⚙️ ¿Cómo funciona la simulación interactiva (la del recuadro grande)?</h2>
-        <p>La simulación principal que verás más abajo (dentro del iframe) no resuelve la ecuación diferencial paso a paso (eso sería muy lento). En su lugar, usa un <strong>método de superposición de modos</strong>. Te lo explico sencillo:</p>
+        <h2>⚙️ ¿Cómo funciona la simulación interactiva</h2>
+        <p>La simulación principal que verás más abajo no resuelve la ecuación diferencial paso a paso (eso sería muy lento). En su lugar, usa un <strong>método de superposición de modos</strong>. Te lo explico sencillo:</p>
         <ol>
             <li><strong>Modos básicos:</strong> Cualquier vibración se puede escribir como suma de muchos “patrones” simples (los senos y cosenos de la sección anterior). La simulación suma hasta 12×12 modos.</li>
             <li><strong>Amplitud de cada modo:</strong> Depende de la frecuencia que elijas y de dónde estén las fuentes (puntos rojos). Si la frecuencia elegida está cerca de la frecuencia natural de un modo, ese modo se vuelve dominante.</li>
