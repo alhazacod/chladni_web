@@ -52,8 +52,6 @@
         const amplitude = 0.4; // altura máxima normalizada (0..1)
         const envelope = Math.sin(n * Math.PI * x);
         const oscillation = Math.cos(2 * Math.PI * frequency * t);
-        // Mapeamos a coordenadas del canvas: y=0 en la parte superior? Mejor usamos un rango centrado.
-        // Devolvemos valor entre -amplitude y +amplitude, donde 0 es la posición de reposo.
         return envelope * oscillation * amplitude;
     }
     
@@ -84,7 +82,7 @@
             // 1. Fuerza horizontal hacia nodos
             let Fx = getHorizontalForce(p.x, time, modeN);
             // 2. Gravedad siempre hacia abajo (en unidades relativas, hacia y=0 que es la cuerda en reposo)
-            let Fy = gravity;  // positiva hacia abajo (recordar que en canvas y++ es abajo)
+            let Fy = gravity;
             
             // Aplicar fuerzas (masa = 1)
             p.vx += Fx * dt;
@@ -94,9 +92,10 @@
             p.vx *= friction;
             p.vy *= verticalFriction;
             
-            // Pequeño ruido
-            p.vx += (Math.random() - 0.5) * noise;
-            p.vy += (Math.random() - 0.5) * noise;
+            // Jitter (ruido) - aumentado para que se note más el movimiento aleatorio
+            const jitterAmount = 0.014;  // valor ajustable, antes era noise=0.002
+            p.vx += (Math.random() - 0.5) * jitterAmount;
+            p.vy += (Math.random() - 0.5) * jitterAmount;
             
             // Actualizar posición
             p.x += p.vx * dt;
@@ -108,20 +107,15 @@
             
             // Obtener la altura de la cuerda en el punto x actual
             let stringY = getStringY(p.x, time, modeN);
-            // Convertir a coordenada en el canvas: la cuerda en reposo está en yCanvas = centerY
-            // Pero para simplificar la física, trabajamos con la misma escala: la cuerda tiene valor stringY (rango -0.4 a 0.4)
-            // La partícula tiene p.y (también en las mismas unidades relativas). La superficie de la cuerda está en stringY.
-            // Si la partícula está por debajo de la cuerda (p.y > stringY), la cuerda la empuja hacia arriba.
+            
+            // Colisión con la cuerda: si la partícula está por debajo de la cuerda, rebota
             if (p.y > stringY) {
-                // Colisión: la partícula toca o atraviesa la cuerda
-                p.y = stringY; // la ponemos justo encima
-                // Rebote vertical con pérdida
+                p.y = stringY;
                 p.vy = -p.vy * bounceRestitution;
-                // Pequeño empuje horizontal para simular fricción
                 p.vx *= 0.99;
             }
             
-            // No dejar que se vaya demasiado arriba (opcional)
+            // No dejar que se vaya demasiado arriba
             if (p.y < -0.6) p.y = -0.6;
             if (p.y > 0.6) p.y = 0.6;
         }
@@ -317,8 +311,8 @@
     window.addEventListener('resize', resizeCurved);
     
     // Parámetros de los dos modos
-    let m1 = 3, n1 = 3;
-    let m2 = 2, n2 = 2;
+    let m1 = 5, n1 = 3;
+    let m2 = 3, n2 = 5;
     let mix = 0.8;  // coeficiente b/a (a=1 fijo)
     
     // Elementos UI

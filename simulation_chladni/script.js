@@ -6,8 +6,8 @@ const MAX_MODE = 12;
 const state = {
     particles: [],
     sources: [{ x: 0.5, y: 0.5 }],
-    freq: 19.0,
-    targetFreq: 19.0,     // smooth transitions
+    freq: 33.0,
+    targetFreq: 33.0,     // smooth transitions
     lastStableFreq: 19.0, // tracks last freq we settled at, for jump detection
     damping: 0.10,
     bc: 'dirichlet',
